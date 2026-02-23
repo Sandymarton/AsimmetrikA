@@ -1,10 +1,37 @@
+"use client";
+
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 import GlowButton from './GlowButton';
 
 export default function Footer({ theme = "light" }: { theme?: "light" | "dark" }) {
     const isDark = theme === "dark";
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.fromTo('.footer-anim-item',
+            { y: 50, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.15,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: 'top 85%'
+                }
+            }
+        );
+    }, { scope: containerRef });
 
     return (
         <footer
+            ref={containerRef}
             id="contact"
             className={`w-full py-16 md:py-24 px-6 md:px-12 lg:px-24 transition-colors duration-700 ${isDark ? 'bg-black text-white' : 'bg-transparent text-black'}`}
             data-theme={isDark ? undefined : "light"}
@@ -13,6 +40,7 @@ export default function Footer({ theme = "light" }: { theme?: "light" | "dark" }
 
                 <div className="flex flex-col gap-6">
                     <div
+                        className="footer-anim-item"
                         style={{
                             display: 'inline-block',
                             background: '#0d0d0d',
@@ -41,16 +69,16 @@ export default function Footer({ theme = "light" }: { theme?: "light" | "dark" }
                     </div>
                     <a
                         href="mailto:contact@asimmetrika.co.uk"
-                        className={`text-lg md:text-xl font-light transition-colors ${isDark ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-black'}`}
+                        className={`footer-anim-item text-lg md:text-xl font-light transition-colors ${isDark ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-black'}`}
                     >
                         contact@asimmetrika.co.uk
                     </a>
-                    <div className="mt-4">
+                    <div className="mt-4 footer-anim-item">
                         <GlowButton href="https://calendly.com/fsquaredfrancone/asimmetrika-consultation">BOOK A FREE CONSULTATION</GlowButton>
                     </div>
                 </div>
 
-                <div className={`flex flex-col justify-end text-sm md:text-base font-light tracking-widest uppercase ${isDark ? 'text-zinc-500' : 'text-zinc-400'}`}>
+                <div className={`footer-anim-item flex flex-col justify-end text-sm md:text-base font-light tracking-widest uppercase ${isDark ? 'text-zinc-500' : 'text-zinc-400'}`}>
                     <p>&copy; {new Date().getFullYear()} AsimmetrikA.</p>
                     <p>All rights reserved.</p>
                 </div>
