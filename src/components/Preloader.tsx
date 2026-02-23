@@ -410,8 +410,8 @@ export default function Preloader() {
             ref={containerRef}
             className="fixed inset-0 z-[9999] flex items-center justify-center pointer-events-none overflow-hidden"
         >
-            {/* Video background */}
-            <div ref={bgRef} className="absolute inset-0 pointer-events-auto">
+            {/* Video background wrapper with solid black so it doesn't flash grey before load */}
+            <div ref={bgRef} className="absolute inset-0 pointer-events-auto bg-black">
                 <video
                     ref={videoRef}
                     className="absolute inset-0 w-full h-full object-cover"

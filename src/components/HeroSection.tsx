@@ -191,7 +191,7 @@ export default function HeroSection() {
             data-theme="light"
         >
             {/* Fullscreen video background */}
-            <div className="hero-image-wrapper absolute inset-0 w-full h-full">
+            <div className="hero-image-wrapper absolute inset-0 w-full h-full bg-black">
                 <video
                     ref={videoRef}
                     autoPlay
