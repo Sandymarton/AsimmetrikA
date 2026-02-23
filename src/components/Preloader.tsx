@@ -302,6 +302,12 @@ export default function Preloader() {
 
         document.body.style.overflow = 'hidden';
 
+        if (videoRef.current) {
+            videoRef.current.defaultMuted = true;
+            videoRef.current.muted = true;
+            videoRef.current.play().catch(e => console.warn("Preloader video play blocked:", e));
+        }
+
         letterEls.forEach((el, i) => {
             gsap.set(el, { x: i % 2 === 0 ? -vw * 1.6 : vw * 1.6, opacity: 0 });
         });
@@ -381,6 +387,7 @@ export default function Preloader() {
                     autoPlay
                     muted
                     playsInline
+                    preload="auto"
                     loop
                 />
                 {/* Dark overlay so geometry and text pop over the video */}

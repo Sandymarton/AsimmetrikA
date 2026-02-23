@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -25,6 +25,15 @@ const MagneticText = ({ text }: { text: string }) => {
 
 export default function HeroSection() {
     const containerRef = useRef<HTMLElement>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.defaultMuted = true;
+            videoRef.current.muted = true;
+            videoRef.current.play().catch(e => console.warn("Hero video play blocked:", e));
+        }
+    }, []);
 
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -184,9 +193,11 @@ export default function HeroSection() {
             {/* Fullscreen video background */}
             <div className="hero-image-wrapper absolute inset-0 w-full h-full">
                 <video
+                    ref={videoRef}
                     autoPlay
                     muted
                     playsInline
+                    preload="auto"
                     loop
                     className="hero-image absolute inset-0 w-full h-full object-cover"
                     src="/Video/Video_Pronto_Link_Fornito.mp4"
