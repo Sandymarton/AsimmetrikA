@@ -377,7 +377,7 @@ export default function Preloader() {
                 <video
                     ref={videoRef}
                     className="absolute inset-0 w-full h-full object-cover"
-                    src="/Video/AsimmetrikA vid.mov"
+                    src="/Video/AsimmetrikA_vid.mp4"
                     autoPlay
                     muted
                     playsInline
