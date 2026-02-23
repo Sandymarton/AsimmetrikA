@@ -354,15 +354,21 @@ export default function Preloader() {
 
         // Geometry + background fade out
         tl.to(S, { globalAlpha: 0, duration: 1.2, ease: 'power2.inOut' }, 'explode+=0.6');
+        tl.to(canvasRef.current, { opacity: 0, duration: 1.2, ease: 'power2.inOut' }, 'explode+=0.6');
         tl.to(bg, { opacity: 0, duration: 1.5, ease: 'power2.inOut' }, 'explode+=0.8');
+
+        tl.set(canvasRef.current, { display: 'none' });
         tl.set(bg, { display: 'none' });
 
         tl.add(() => {
             document.body.style.overflow = '';
             cancelAnimationFrame(rafId);
             if (container) {
-                container.style.position = 'absolute';
-                container.style.zIndex = '-1';
+                container.style.opacity = '0';
+                container.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    container.style.display = 'none';
+                }, 100);
             }
         });
 
