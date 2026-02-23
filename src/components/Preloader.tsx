@@ -314,6 +314,7 @@ export default function Preloader() {
 
         // ── Master timeline ───────────────────────────────────────────────────
         const tl = gsap.timeline({
+            paused: true,
             onComplete: () => {
                 sessionStorage.setItem('preloaderPlayed', 'true');
                 (window as Window & { __preloaderDone?: boolean }).__preloaderDone = true;
@@ -365,7 +366,32 @@ export default function Preloader() {
             }
         });
 
+        // Start animation only when video has at least enough data to show a frame
+        const startAnimation = () => {
+            if (tl.paused()) {
+                tl.play();
+            }
+        };
+
+        const vid = videoRef.current;
+        if (vid) {
+            if (vid.readyState >= 3) {
+                startAnimation();
+            } else {
+                vid.addEventListener('canplay', startAnimation);
+                vid.addEventListener('playing', startAnimation);
+                // Also fallback to a timeout just in case it takes too long
+                setTimeout(startAnimation, 2000);
+            }
+        } else {
+            startAnimation();
+        }
+
         return () => {
+            if (vid) {
+                vid.removeEventListener('canplay', startAnimation);
+                vid.removeEventListener('playing', startAnimation);
+            }
             tl.kill();
             cancelAnimationFrame(rafId);
             window.removeEventListener('resize', setSize);
