@@ -1,0 +1,21 @@
+/* Base state for our materializing text */
+.materializeText {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    filter: blur(10px);
+    will-change: transform, opacity, filter;
+}
+
+.materializeLine {
+    /* Wrapper for lines if we split them */
+    overflow: hidden;
+    display: inline-block;
+}
+
+.serviceLine {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .serviceLine {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}

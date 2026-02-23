@@ -1,0 +1,62 @@
+.teamSection {
+    padding: 8rem 4vw;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 4rem 3rem;
+}
+
+.memberCard {
+    display: flex;
+    flex-direction: column;
+}
+
+.imageContainer {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+    border-radius: 4px;
+    /* subtle rounding if required */
+}
+
+.memberImage {
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.imageContainer:hover .memberImage {
+    transform: scale(1.05);
+}
+
+.memberName {
+    font-size: 1.5rem;
+    font-family: var(--font-heading);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+.memberRole {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.memberDescription {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+}
