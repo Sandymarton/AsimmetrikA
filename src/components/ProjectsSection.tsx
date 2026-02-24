@@ -66,7 +66,6 @@ const projects = [
 
 export default function ProjectsSection() {
     const sectionRef = useRef<HTMLElement>(null);
-    const wrapperRef = useRef<HTMLDivElement>(null);
     const cardsRef = useRef<HTMLDivElement[]>([]);
 
     useGSAP(() => {
@@ -81,7 +80,7 @@ export default function ProjectsSection() {
             const tl = gsap.timeline();
 
             // Animate each card after the first one to slide in from the right and overlap
-            cards.slice(1).forEach((card, i) => {
+            cards.slice(1).forEach((card) => {
                 tl.to(card, {
                     xPercent: -100,
                     ease: "none",
