@@ -5,6 +5,7 @@ import ServicesSection from '@/components/ServicesSection';
 import ProjectsSection from '@/components/ProjectsSection';
 import TeamSection from '@/components/TeamSection';
 import Footer from '@/components/Footer';
+import FallingLeaves from '@/components/FallingLeaves';
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
           <HeroSection />
           <AboutSection />
         </div>
+        <FallingLeaves />
         <ServicesSection />
         <ProjectsSection />
         <TeamSection />
