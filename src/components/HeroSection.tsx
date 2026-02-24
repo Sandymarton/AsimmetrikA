@@ -112,26 +112,15 @@ export default function HeroSection() {
                 );
             });
 
-            // --- 3. Hero Image Fade in ---
-            gsap.fromTo(".hero-image-wrapper", {
-                scale: 1.05,
-                opacity: 0
-            }, {
-                scale: 1,
-                opacity: 1,
-                duration: 1.5,
-                ease: "power3.out",
-                delay: 0.8
-            });
+            // --- 3. Removed Hero Image Fade (handled natively by preloader reveal) ---
         };
 
-        // Set all hero elements invisible immediately only if preloader is running
+        // Set all hero text elements invisible immediately only if preloader is running
         // (skip if preloader already completed — e.g. back navigation)
         const preloaderAlreadyDone = (window as Window & { __preloaderDone?: boolean }).__preloaderDone;
         if (!preloaderAlreadyDone) {
             gsap.set('.hero-title-line span.block', { opacity: 0 });
             gsap.set('.hero-desc .magnetic-word', { opacity: 0 });
-            gsap.set('.hero-image-wrapper', { opacity: 0 });
         }
 
         let fired = false;
