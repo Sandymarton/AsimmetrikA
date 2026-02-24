@@ -28,11 +28,25 @@ export default function HeroSection() {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
+        let playInterval: NodeJS.Timeout;
         if (videoRef.current) {
-            videoRef.current.defaultMuted = true;
             videoRef.current.muted = true;
-            videoRef.current.play().catch(e => console.warn("Hero video play blocked:", e));
+            videoRef.current.defaultMuted = true;
+            videoRef.current.playsInline = true;
+            videoRef.current.setAttribute("muted", "true");
+            videoRef.current.setAttribute("playsinline", "true");
+
+            playInterval = setInterval(() => {
+                if (videoRef.current) {
+                    videoRef.current.play().then(() => {
+                        clearInterval(playInterval);
+                    }).catch(() => { });
+                }
+            }, 500);
         }
+        return () => {
+            if (playInterval) clearInterval(playInterval);
+        };
     }, []);
 
     useGSAP(() => {
@@ -194,13 +208,13 @@ export default function HeroSection() {
             <div className="hero-image-wrapper absolute inset-0 w-full h-full bg-black">
                 <video
                     ref={videoRef}
+                    className="hero-image absolute inset-0 w-full h-full object-cover pointer-events-none"
+                    src="/Video/Video_Pronto_Link_Fornito.mp4"
                     autoPlay
                     muted
+                    loop
                     playsInline
                     preload="auto"
-                    loop
-                    className="hero-image absolute inset-0 w-full h-full object-cover"
-                    src="/Video/Video_Pronto_Link_Fornito.mp4"
                 />
                 {/* Gradient: clear top → heavy dark bottom so text pops */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/75" />

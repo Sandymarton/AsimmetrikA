@@ -26,9 +26,9 @@ export default function AboutSection() {
                 ease: "none",
                 stagger: 0.1,
                 scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top bottom",
-                    end: "bottom top",
+                    trigger: document.body,
+                    start: "top top",
+                    end: "bottom bottom",
                     scrub: 1, // Smooth scrub
                 }
             });
@@ -146,18 +146,18 @@ export default function AboutSection() {
         <section
             ref={sectionRef}
             id="about"
-            className="relative z-[2] bg-black text-white py-32 md:py-48 px-6 md:px-12 lg:px-24 overflow-hidden"
+            className="relative z-[2] bg-black text-white py-32 md:py-48 px-6 md:px-12 lg:px-24"
             data-theme="dark"
         >
             {/* Premium 3D Architectural / Geometric Wireframe Background */}
-            <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+            <div className="absolute inset-0 pointer-events-none z-0">
                 {/* A glowing subtle gradient blob to illuminate the shapes */}
                 <div className="absolute top-[30%] right-[15%] w-[600px] h-[600px] bg-white/10 rounded-full blur-[120px]" />
 
                 <div
                     ref={gridRef}
-                    className="fixed top-1/2 left-[75%] md:left-[80%] w-[600px] h-[600px] md:w-[800px] md:h-[800px] -mt-[300px] md:-mt-[400px] -ml-[300px] md:-ml-[400px] opacity-40"
-                    style={{ perspective: "1000px", transformStyle: "preserve-3d", zIndex: -1 }}
+                    className="fixed top-1/2 left-[75%] md:left-[80%] w-[600px] h-[600px] md:w-[800px] md:h-[800px] -mt-[300px] md:-mt-[400px] -ml-[300px] md:-ml-[400px] opacity-40 z-0"
+                    style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
                 >
                     {/* Frame 1 */}
                     <div className="absolute inset-0 border border-white/50 rotate-[15deg] scale-110" style={{ transformStyle: "preserve-3d" }}></div>

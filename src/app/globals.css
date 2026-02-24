@@ -44,4 +44,18 @@
       0 1px 4px rgba(0, 0, 0, 0.95),
       0 2px 16px rgba(0, 0, 0, 0.8);
   }
+
+  /* Fix for Safari showing play button on autoplay videos */
+  video::-webkit-media-controls {
+    display: none !important;
+  }
+
+  video::-webkit-media-controls-enclosure {
+    display: none !important;
+  }
+
+  video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none;
+  }
 }

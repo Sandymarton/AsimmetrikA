@@ -302,10 +302,21 @@ export default function Preloader() {
 
         document.body.style.overflow = 'hidden';
 
+        let playInterval: NodeJS.Timeout;
         if (videoRef.current) {
-            videoRef.current.defaultMuted = true;
             videoRef.current.muted = true;
-            videoRef.current.play().catch(e => console.warn("Preloader video play blocked:", e));
+            videoRef.current.defaultMuted = true;
+            videoRef.current.playsInline = true;
+            videoRef.current.setAttribute("muted", "true");
+            videoRef.current.setAttribute("playsinline", "true");
+
+            playInterval = setInterval(() => {
+                if (videoRef.current) {
+                    videoRef.current.play().then(() => {
+                        clearInterval(playInterval);
+                    }).catch(() => { });
+                }
+            }, 500);
         }
 
         letterEls.forEach((el, i) => {
@@ -394,6 +405,7 @@ export default function Preloader() {
         }
 
         return () => {
+            if (playInterval) clearInterval(playInterval);
             if (vid) {
                 vid.removeEventListener('canplay', startAnimation);
                 vid.removeEventListener('playing', startAnimation);
@@ -414,13 +426,13 @@ export default function Preloader() {
             <div ref={bgRef} className="absolute inset-0 pointer-events-auto bg-black">
                 <video
                     ref={videoRef}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover pointer-events-none"
                     src="/Video/AsimmetrikA_vid.mp4"
                     autoPlay
                     muted
+                    loop
                     playsInline
                     preload="auto"
-                    loop
                 />
                 {/* Dark overlay so geometry and text pop over the video */}
                 <div className="absolute inset-0 bg-black/40" />
