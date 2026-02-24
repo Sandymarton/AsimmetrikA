@@ -12,7 +12,7 @@ const projects = [
         id: 1,
         title: "Project Zero",
         location: "Architecture & Design", // Fallback location since live site doesn't have it on the card
-        image: "https://images.squarespace-cdn.com/content/v1/67ad5314e31aeb30eaaab99e/1741717189205-QNGFHQQNK58BBPRLHK5L/Screenshot+2025-03-11+at+18.11.27.png"
+        image: "/project-0.jpg"
     },
     {
         id: 2,

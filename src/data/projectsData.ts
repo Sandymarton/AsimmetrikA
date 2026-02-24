@@ -5,7 +5,7 @@ export const projectsData = [
         "url": "https://www.asimmetrika.co.uk/portfolio-/project-nine",
         "description": "This striking 500-square-meter modern villa in Spain is a testament to our comprehensive approach. From managing finances and securing planning permissions to designing and constructing the property, our team oversaw every detail of this €4 million project. The result is a seamless blend of contemporary style and functional living, reflecting our commitment to delivering exceptional, end-to-end service.",
         "gallery": [
-            "https://images.squarespace-cdn.com/content/v1/67ad5314e31aeb30eaaab99e/1741716665933-GCVOMGDYVRC8MTON8D3G/unsplash-image-2gDwlIim3Uw.jpg"
+            "/project-0.jpg"
         ]
     },
     {
