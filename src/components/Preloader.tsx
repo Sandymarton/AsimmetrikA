@@ -354,19 +354,24 @@ export default function Preloader() {
         // Hold after all letters landed (last letter starts at 1+1=2s, finishes at 3.6s → hold at 3.6s)
         tl.to({}, { duration: 0.8 });
 
-        // Text scales up to watermark
+        // Text scales up and fades OUT COMPLETELY
         tl.to(text, {
-            scale: vw < 768 ? 10 : 24,
+            scale: vw < 768 ? 12 : 26,
             color: '#E0D0C6',
-            opacity: 0.1,
-            duration: 2.2,
+            opacity: 0, // No residual shadow lingering
+            duration: 1.6,
             ease: 'expo.inOut',
         }, 'explode');
 
-        // Geometry + background fade out
-        tl.to(S, { globalAlpha: 0, duration: 1.2, ease: 'power2.inOut' }, 'explode+=0.6');
-        tl.to(canvasRef.current, { opacity: 0, duration: 1.2, ease: 'power2.inOut' }, 'explode+=0.6');
-        tl.to(bg, { opacity: 0, duration: 1.5, ease: 'power2.inOut' }, 'explode+=0.8');
+        // Geometry fades out at the start of the explosion
+        tl.to(S, { globalAlpha: 0, duration: 1.0, ease: 'power2.inOut' }, 'explode');
+        tl.to(canvasRef.current, { opacity: 0, duration: 1.0, ease: 'power2.inOut' }, 'explode');
+
+        // Ensure text is removed from render
+        tl.set(text, { display: 'none' }, 'explode+=1.6');
+
+        // Reveal the Home page ONLY AFTER the preloader text is fully gone
+        tl.to(bg, { opacity: 0, duration: 1.2, ease: 'power2.inOut' }, 'explode+=1.6');
 
         tl.set(canvasRef.current, { display: 'none' });
         tl.set(bg, { display: 'none' });
