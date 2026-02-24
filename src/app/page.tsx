@@ -12,7 +12,7 @@ export default function Home() {
       <Header />
       <main>
         {/* Hero pins here via CSS sticky — About slides up and covers it */}
-        <div className="relative">
+        <div className="relative bg-black">
           <HeroSection />
           <AboutSection />
         </div>
